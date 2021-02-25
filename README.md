@@ -1,1 +1,3 @@
 # chattApp
+
+Private chatting app
