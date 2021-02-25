@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, KeyboardAvoidingView } from "react-native";
 import { Button, Input, Image } from "react-native-elements";
 import { stopClock } from "react-native-reanimated";
+import { auth } from "../firebase";
 
 const LoginScreen = (props) => {
   const [email, setEmail] = useState();
@@ -11,6 +12,17 @@ const LoginScreen = (props) => {
   const loginF = () => {
     return console.log("Login");
   };
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((us) => {
+      if (us) {
+        props.navigation.replace("Home");
+        console.log(us);
+      }
+    });
+
+    return unsubscribe;
+  }, []);
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">

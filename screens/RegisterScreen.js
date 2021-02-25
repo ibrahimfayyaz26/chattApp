@@ -3,6 +3,7 @@ import { StyleSheet, View, KeyboardAvoidingView } from "react-native";
 import { Button, Input, Image, Text } from "react-native-elements";
 import { Formik } from "formik";
 import * as yup from "yup";
+import { auth } from "../firebase";
 
 let schema = yup.object().shape({
   fullName: yup.string().required().min(4).max(20),
@@ -20,8 +21,19 @@ const RegisterScreen = ({ navigation }) => {
         picture: "",
       }}
       validationSchema={schema}
-      onSubmit={(value) => {
-        console.log(value);
+      onSubmit={({ fullName, email, password, picture }) => {
+        auth
+          .createUserWithEmailAndPassword(email, password)
+          .then((authUser) => {
+            authUser.user.updateProfile({
+              displayName: fullName,
+              photoURL:
+                picture ||
+                "https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png",
+            });
+            navigation.replace("Home");
+          })
+          .catch((er) => console.log(er));
       }}
     >
       {(props) => {

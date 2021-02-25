@@ -5,6 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
+import Home from "../screens/Home";
 
 const stack = createStackNavigator();
 
@@ -18,12 +19,17 @@ const AppNavigation = () => {
 
   return (
     <NavigationContainer>
-      <stack.Navigator>
+      <stack.Navigator initialRouteName="Home">
         <stack.Screen name="Login" component={LoginScreen} options={options} />
         <stack.Screen
           name="Register"
           component={RegisterScreen}
           options={options}
+        />
+        <stack.Screen
+          name="Home"
+          component={Home}
+          options={{ ...options, ...{ headerTitle: "🖕 Whatsapp 🖕" } }}
         />
       </stack.Navigator>
     </NavigationContainer>
