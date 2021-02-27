@@ -10,14 +10,13 @@ const LoginScreen = (props) => {
   const [password, setPassword] = useState("");
 
   const loginF = () => {
-    return console.log("Login");
+    auth.signInWithEmailAndPassword(email, password);
   };
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((us) => {
       if (us) {
         props.navigation.replace("Home");
-        console.log(us);
       }
     });
 
@@ -45,6 +44,7 @@ const LoginScreen = (props) => {
             secureTextEntry
             value={password}
             onChangeText={(text) => setPassword(text)}
+            onSubmitEditing={loginF}
           />
         </View>
         <Button title="Login" containerStyle={styles.button} onPress={loginF} />
