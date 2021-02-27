@@ -31,7 +31,9 @@ const RegisterScreen = ({ navigation }) => {
                 picture ||
                 "https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png",
             });
-            navigation.replace("Home");
+            setTimeout(() => {
+              props.navigation.replace("Home");
+            }, 1500);
           })
           .catch((er) => console.log(er));
       }}
