@@ -14,6 +14,7 @@ const AddScreen = ({ navigation }) => {
       })
       .then(() => {
         navigation.goBack();
+        setInput("");
       });
   };
   return (
@@ -31,6 +32,7 @@ const AddScreen = ({ navigation }) => {
         />
       </View>
       <Button
+        disabled={!input}
         title="ADD"
         containerStyle={{ width: "50%", marginTop: 10 }}
         onPress={adding}

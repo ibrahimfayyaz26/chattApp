@@ -7,6 +7,7 @@ import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 import Home from "../screens/Home";
 import AddScreen from "../screens/AddScreen";
+import ChatScreen from "../screens/ChatScreen";
 
 const stack = createStackNavigator();
 
@@ -41,6 +42,15 @@ const AppNavigation = () => {
           options={{
             ...options,
             ...{ headerTitle: "Add New Chatt" },
+          }}
+        />
+        <stack.Screen
+          name="Chat"
+          component={ChatScreen}
+          options={{
+            headerStyle: { backgroundColor: "#2c6bed" },
+            headerTitleStyle: { color: "white" },
+            headerTintColor: "white",
           }}
         />
       </stack.Navigator>

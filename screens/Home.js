@@ -55,11 +55,6 @@ const Home = ({ navigation }) => {
             flexDirection: "row",
           }}
         >
-          <View style={{ marginStart: 5 }}>
-            <TouchableOpacity>
-              <AntDesign name="camerao" size={24} />
-            </TouchableOpacity>
-          </View>
           <View style={{ marginStart: 20 }}>
             <TouchableOpacity onPress={() => navigation.navigate("Add")}>
               <SimpleLineIcons name="pencil" size={24} />
@@ -70,12 +65,24 @@ const Home = ({ navigation }) => {
     });
   }, [navigation]);
 
+  const ChatScreen = (id, chatName) => {
+    navigation.navigate("Chat", {
+      id: id,
+      chatName: chatName,
+    });
+  };
+
   return (
     <SafeAreaView>
       <ScrollView style={{ height: "100%" }}>
         <View style={styles.container}>
           {chat.map(({ id, data: { chatName } }) => (
-            <ChatList key={id} id={id} chatName={chatName} />
+            <ChatList
+              key={id}
+              id={id}
+              chatName={chatName}
+              ChatScreen={() => ChatScreen(id, chatName)}
+            />
           ))}
         </View>
       </ScrollView>
